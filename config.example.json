@@ -1,0 +1,129 @@
+{
+	"threads": 2,
+	"coin": "clo",
+	"name": "main",
+	"pplns": 9000,
+
+	"proxy": {
+		"enabled": true,
+		"listen": "0.0.0.0:8888",
+		"limitHeadersSize": 1024,
+		"limitBodySize": 256,
+		"behindReverseProxy": false,
+		"blockRefreshInterval": "120ms",
+		"stateUpdateInterval": "3s",
+		"difficulty": 2000000000,
+		"hashrateExpiration": "3h",
+
+		"healthCheck": true,
+		"maxFails": 100,
+
+		"stratum": {
+			"enabled": true,
+			"listen": "0.0.0.0:8008",
+			"timeout": "120s",
+			"maxConn": 8192
+		},
+
+		"policy": {
+			"workers": 8,
+			"resetInterval": "60m",
+			"refreshInterval": "1m",
+
+			"banning": {
+				"enabled": false,
+				"ipset": "blacklist",
+				"timeout": 1800,
+				"invalidPercent": 30,
+				"checkThreshold": 30,
+				"malformedLimit": 5
+			},
+			"limits": {
+				"enabled": false,
+				"limit": 30,
+				"grace": "5m",
+				"limitJump": 10
+			}
+		}
+	},
+
+	"api": {
+		"enabled": true,
+		"purgeOnly": false,
+		"purgeInterval": "10m",
+		"listen": "0.0.0.0:8080",
+		"statsCollectInterval": "5s",
+		"hashrateWindow": "30m",
+		"hashrateLargeWindow": "3h",
+		"luckWindow": [64, 128, 256],
+		"payments": 30,
+		"blocks": 50,
+		"poolCharts":"0 */20 * * * *",
+		"poolChartsNum":74,
+		"minerCharts":"0 */20 * * * *",
+		"minerChartsNum":74
+	},
+
+	"upstreamCheckInterval": "5s",
+	"upstream": [
+		{
+			"name": "main",
+			"url": "http://127.0.0.1:9656",
+			"timeout": "10s"
+		}
+	],
+
+	"redis": {
+		"endpoint": "127.0.0.1:6379",
+		"poolSize": 10,
+		"database": 0,
+		"password": ""
+	},
+
+	"unlocker": {
+		"enabled": true,
+		"poolFee": 1.0,
+		"poolFeeAddress": "0x38BEAa9AfA965A360cfdf21982C6ac8991BFF1c2",
+		"donate": true,
+		"depth": 120,
+		"immatureDepth": 20,
+		"keepTxFees": false,
+		"interval": "10m",
+		"daemon": "http://127.0.0.1:9656",
+		"timeout": "10s"
+	},
+
+	"payouts": {
+		"enabled": true,
+		"requirePeers": 5,
+		"interval": "120m",
+		"daemon": "http://127.0.0.1:9656",
+		"timeout": "10s",
+		"address": "0x935115b9ae16338a6378549203476cbefb97923f",
+		"gas": "21000",
+		"gasPrice": "50000000000",
+		"autoGas": true,
+		"threshold": 500000000,
+		"blacklist":[
+			"0x3c9b204db23b902d4295e6aba3405917efd59449",
+			"0xe8b6818cf0d24bd0e7ded854b3d368662a150dab",
+			"0x006ca003f8a812f80a7d5165fcd731af610ba99e",
+			"0x5710fb25d92a933149749a21dc2858b2a3919c36",
+			"0x34faaa028162c4d4e92db6abfa236a8e90ff2fc3",
+			"0x3509f7bd9557f8a9b793759b3e3bfa2cd505ae31",
+			"0x7fb21ac4cd75d9de3e1c5d11d87bb904c01880fc",
+			"0xb9cf2da90bdff1bc014720cc84f5ab99d7974eba",
+			"0xc1c427cd8e6b7ee3b5f30c2e1d3f3c5536ec16f5",
+			"0xc6f31a79526c641de4e432cb22a88bb577a67eac",
+			"0xde088812a9c5005b0dc8447b37193c9e8b67a1ff",
+			"0xe19ffb70e148a76d26698036a9ffd22057967d1b"
+		],
+		"bgsave": false,
+		"concurrentTx": 10
+	},
+
+	"newrelicEnabled": false,
+	"newrelicName": "MyEtherProxy",
+	"newrelicKey": "SECRET_KEY",
+	"newrelicVerbose": false
+}
